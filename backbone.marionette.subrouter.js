@@ -72,13 +72,15 @@
                 hash = Backbone.history.getHash();
             }
 
-            _.every(this.appRoutes, function(key, route){
-                if (hash.match(Backbone.Router.prototype._routeToRegExp(route))) {
-                    Backbone.history.loadUrl(hash);
-                    return false;
-                }
-                return true;
-            }, this);
+            if(Backbone.History.started) {
+                _.every(this.appRoutes, function(key, route){
+                    if (hash.match(Backbone.Router.prototype._routeToRegExp(route))) {
+                        Backbone.history.loadUrl(hash);
+                        return false;
+                    }
+                    return true;
+                }, this);
+            }
         }
     });
  
